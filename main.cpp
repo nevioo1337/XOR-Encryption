@@ -3,6 +3,7 @@
 #include <vector>
 #include <bitset>
 #include <random>
+#include <sstream>
 
 std::string input = "";
 std::string msg = "";
@@ -43,7 +44,6 @@ std::string EncStr(std::string msg) {
 
     std::string keyBitset = RetBitset(key);
     std::string msgBitset = RetBitset(msg);
-    std::cout << "Original:  " + msgBitset << std::endl;
 
     for (size_t i = 0; i < msgBitset.length(); i++)
     {
@@ -59,7 +59,18 @@ std::string DecStr(std::string msg, std::string key) {
     {
         msg[i] = Xor(msg[i], keyBitset[i]);
     }
-    return msg;
+
+    std::stringstream sstream(msg);
+    std::string output;
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
+
+    return output;
 }
 
 int main()
