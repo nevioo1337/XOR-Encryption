@@ -1,2 +1,2 @@
-# XOR-String
-XOR String
+# XOR-Encryption
+XOR Encryption
